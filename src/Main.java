@@ -78,9 +78,12 @@ public class Main {
                                                     System.out.println("City not found!");
                                                     break;
                                                 }
+
                                             }
+                                            System.out.println("Enter Seats in Flight : ");
+                                            int Seats=scanner.nextInt();
                                             if (isFound) {
-                                                fl.addRoute(citiesArraySelected, date);
+                                                fl.addRoute(citiesArraySelected, date,Seats);
                                                 System.out.println("Route Added!");
                                             }
                                         } else {
@@ -109,7 +112,7 @@ public class Main {
                                     if (c2 == 1) {
                                         System.out.println("Enter name :");
                                         String name = scanner.nextLine().toUpperCase();
-                                        if (name.equals("") || !name.strip().matches("^[A-Za-z\\s]*$")) {
+                                        if (name.isEmpty() || !name.strip().matches("^[A-Za-z\\s]*$")) {
                                             System.out.println("Name must have only alphabets!");
                                             continue;
                                         }
@@ -141,7 +144,7 @@ public class Main {
                                             continue;
                                         }
                                         passengersArray.findPassenger(passengerId);
-                                    } else if (c2 == 2) {
+                                    } else if (c2 == 3) {
                                         System.out.println("All Passengers : ");
                                         passengersArray.displayAllPassengers();
                                     } else if (c2 == 0) {

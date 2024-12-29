@@ -8,11 +8,11 @@ public class NodeFlight  {
     public NodeFlight next = null;
 
     // Time complexity = O(1)
-    public NodeFlight(City source, City destination) {
+    public NodeFlight(City source, City destination, int Seats) {
         this.flightId = nextFlightId;
         this.source = source;
         this.destination = destination;
-        this.seats = new NodePassenger[5]; //100 seats of NodePassenger class
+        this.seats = new NodePassenger[Seats];
         nextFlightId++;
     }
 

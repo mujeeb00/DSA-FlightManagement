@@ -12,10 +12,10 @@ public class FlightRoutesList{
     }
 
     // Time complexity = O(n)
-    public int addRoute(City[] cities,String date) { // added date
+    public int addRoute(City[] cities,String date,int Seats) { // added date
         NodeFlightRoute route = new NodeFlightRoute(date); // added date
         for (int i = 0; i < cities.length - 1; i++) {
-            route.flights.addFlight(cities[i], cities[i + 1]);
+            route.flights.addFlight(cities[i], cities[i + 1],Seats);
         }
         insertLast(route);
         return route.getRouteId();

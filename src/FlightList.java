@@ -18,8 +18,8 @@ public class FlightList {
     }
 
     // Time complexity = O(1)  - For inserting at last Time complexity = O(n)
-    public void addFlight(City source, City destination) {
-        NodeFlight flight = new NodeFlight(source, destination);
+    public void addFlight(City source, City destination,int Seats) {
+        NodeFlight flight = new NodeFlight(source, destination,Seats);
         insertLast(flight);
     }
 
