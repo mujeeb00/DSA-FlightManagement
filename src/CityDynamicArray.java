@@ -22,7 +22,9 @@ public class CityDynamicArray {
     private void resize() {
         int newCapacity = data.length * 2;
         City[] newData = new City[newCapacity];
-        System.arraycopy(data, 0, newData, 0, size);
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
         data = newData;
     }
 
