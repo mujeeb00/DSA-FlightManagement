@@ -206,17 +206,10 @@ public class Main {
                                         int passengerId = scanner.nextInt();
                                         NodePassenger passenger = passengersArray.findPassenger(passengerId);
                                         if (passenger != null) {
-                                            System.out.println("Enter Source : ");
-                                            String citySource = scanner.next().toUpperCase();
-                                            System.out.println("Enter Destination : ");
-                                            String cityDestination = scanner.next().toUpperCase();
-                                            System.out.println("Enter Selected Route Id : ");
+                                            System.out.println("Enter Route Id : ");
                                             int routeId = scanner.nextInt();
-                                            boolean isAvailable = fl.getRoutes(citySource, cityDestination);
-                                            if(isAvailable)
-                                                fl.removePassengerFromFlights(passenger,routeId,citySource,cityDestination);
+                                            fl.removePassengerFromFlights(passenger,routeId);
                                         }
-
                                     }
                                     else if (c3 == 0){
                                         break;

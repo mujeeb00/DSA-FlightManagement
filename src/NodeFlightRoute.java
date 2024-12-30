@@ -66,51 +66,6 @@ public class NodeFlightRoute {
 
     }
 
-    // helper function to find the best route
-    // Time complexity = O(n^2)
-    public City[] getCities(String citySource, String cityDestination) {
-
-        int j = 0; //count for cities nodes between source city and destination city
-
-        // to check if the source and destination match in the flight
-        boolean source = false;
-        boolean destination = false;
-
-        NodeFlight temp = null; // to preserve the original flights head
-        NodeFlight current = flights.head;
-        while (current != null) {
-            if (citySource.equals(current.source.name)) {
-                source = true;
-                // set the head where the source city is
-                temp = current;
-            }
-            // count cities from the source if true
-            if (source)
-                j += 1;
-            if (cityDestination.equals(current.destination.name)) {
-                destination = true;
-                //break if destination is found
-                break;
-            }
-            current = current.next;
-        }
-        //setting current to newly set flights head
-        int i = 0; //index for cities array
-        if (source && destination) {
-            City[] cities = new City[j + 1];
-            while (temp != null) {
-                cities[i] = temp.source;
-                i += 1;
-                if (temp.destination.name.equals(cityDestination)) {
-                    cities[i] = temp.destination;
-                    break;
-                }
-                temp = temp.next;
-            }
-            return cities;
-        }
-        return null;
-    }
 
     // Time complexity = O(1) combine with display method Time complexity = O(n)
     public void display() {

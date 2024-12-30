@@ -131,54 +131,31 @@
             }
         }
 
-        //-------------------------------------//
 
-        // Time complexity = O(n^4)
-        public void removePassengerFromFlights(NodePassenger passenger, int routeId, String sourceCity, String destinationCity) {
+        public void removePassengerFromFlights(NodePassenger passenger, int routeId) {
+            NodeFlightRoute currentRoute = this.head;
+            // Traverse through the flight routes
+            while (currentRoute != null) {
+                if (currentRoute.getRouteId() == routeId) {
+                    // Get the first flight in the current route
+                    NodeFlight flight = currentRoute.flights.head;
 
-            NodeFlightRoute current = this.head; // flightLinkedList's head which is a NodeFlight node
-
-            while (current != null) {
-                if (current.getRouteId() == routeId) {
-                    //flight node (for from-to)
-                    NodeFlight flight = current.flights.head;
+                    // Traverse through the flights in the current route
                     while (flight != null) {
-                        int seatNum; //seat number
-                        if (flight.source.name.equals(sourceCity)) {
-                            for (int i = 0; i < flight.seats.length; i++) {
-                                if (flight.seats[i] == passenger) {
-                                    flight.seats[i] = null;
-                                    seatNum = i;
-                                    System.out.println("Passenger removed from seat " + seatNum + " on flight " + flight.flightId);
-                                    if (!flight.destination.name.equals(destinationCity)) {
-                                        flight = flight.next;
-                                    } else {
-                                        break;
-                                    }
-                                    //traverse from source city to destination city and set seats in between
-                                    while (flight != null) {
-                                        for (i = 0; i < flight.seats.length; i++) {
-                                            if (flight.seats[i] == passenger) {
-                                                flight.seats[i] = null;
-                                                seatNum = i;
-                                                System.out.println(
-                                                        "Passenger removed from seat " + seatNum + " on flight " + flight.flightId);
-                                                break;
-                                            }
-                                        }
-                                        if (flight.destination.name.equals(destinationCity)) {
-                                            break;
-                                        }
-                                        flight = flight.next;
-                                    }
-                                    break;
-                                }
+                        // Check each seat in the flight
+                        for (int i = 0; i < flight.seats.length; i++) {
+                            if (flight.seats[i] == passenger) {
+                                // Remove the passenger from the seat
+                                flight.seats[i] = null;
+                                System.out.println("Passenger removed from seat " + i + " on flight " + flight.flightId);
+                                break; // Exit the loop after removing the passenger
                             }
                         }
                         flight = flight.next;
                     }
+                    break;
                 }
-                current = current.next;
+                currentRoute = currentRoute.next;
             }
         }
         //-------------------------------------//
