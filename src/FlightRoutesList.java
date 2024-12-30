@@ -82,48 +82,38 @@
             return(routeFound && seatsAvailable);
         }
 
-        // Time complexity = O(n^4)
         public void addPassengerToFlights(NodePassenger passenger, int routeId, String sourceCity, String destinationCity) {
-            NodeFlightRoute current = this.head; // flightLinkedList's head which is a NodeFlight node
+            NodeFlightRoute current = this.head;
 
-            //Getting connection numbers to add passenger between specific flights
+            // Traverse the route list to find the matching routeId
             while (current != null) {
                 if (current.getRouteId() == routeId) {
-                    //flight node (for from-to)
-                    NodeFlight flight = current.flights.head;
+                    NodeFlight flight = current.flights.head; // Get the first flight in the route
+                    boolean bookingStarted = false; // Flag to start booking when sourceCity is found
+
+                    // Traverse the flight list to book seats
                     while (flight != null) {
-                        int seatNum; //seat number
+                        // Check if this is the source city to start booking
                         if (flight.source.name.equals(sourceCity)) {
+                            bookingStarted = true;
+                        }
+
+                        //reserving seats until destination
+                        if (bookingStarted) {
                             for (int i = 0; i < flight.seats.length; i++) {
                                 if (flight.seats[i] == null) {
-                                    flight.seats[i] = passenger;
-                                    seatNum = i;
-                                    System.out.println("Booked seat " + seatNum + " on flight " + flight.flightId);
-                                    if (!flight.destination.name.equals(destinationCity)) {
-                                        flight = flight.next;
-                                    } else {
-                                        break;
-                                    }
-                                    //traverse from source city to destination city and set seats in between
-                                    while (flight != null) {
-                                        for (i = 0; i < flight.seats.length; i++) {
-                                            if (flight.seats[i] == null) {
-                                                flight.seats[i] = passenger;
-                                                seatNum = i;
-                                                System.out.println(
-                                                        "Booked seat " + seatNum + " in flight " + flight.flightId);
-                                                break;
-                                            }
-                                        }
-                                        if (flight.destination.name.equals(destinationCity)) {
-                                            break;
-                                        }
-                                        flight = flight.next;
-                                    }
+                                    flight.seats[i] = passenger; // Book the seat
+                                    System.out.println("Booked seat " + i + " on flight " + flight.flightId);
                                     break;
                                 }
                             }
                         }
+
+                        // Stop booking if we've reached the destination city
+                        if (flight.destination.name.equals(destinationCity)) {
+                            return; // Booking complete
+                        }
+
                         flight = flight.next;
                     }
                 }
