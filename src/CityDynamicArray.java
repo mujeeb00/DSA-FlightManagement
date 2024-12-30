@@ -41,20 +41,6 @@ public class CityDynamicArray {
         return size;
     }
 
-    // Removes city from the array by index
-    public void remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        System.arraycopy(data, index + 1, data, index, size - index - 1);
-        size--;
-    }
-
-    // Checks if the array is empty
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     // Display
     public void display() {
         for (int i = 0; i < size; i++) {

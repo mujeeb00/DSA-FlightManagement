@@ -69,37 +69,4 @@ public class PassengerList  {
         return null;
     }
 
-    // Time complexity = O(n)
-    public void deleteFromPosition(int pos) {
-        if (isEmpty()) {
-            System.out.println("List is already empty.");
-        } else if (pos > listLength() || pos < 1) {
-            System.out.println("Invalid position!");
-        } else if (head.next == null && pos == 1) {
-            head = null;
-        } else if (pos == 1) {
-            NodePassenger temp = head;
-            head = head.next;
-            temp.next = null;
-        } else {
-            NodePassenger temp = head;
-            int i = 1;
-            while (i < pos - 1) {
-                temp = temp.next;
-                pos--;
-            }
-            temp.next = temp.next.next;
-        }
-    }
-
-    // Time complexity = O(n)
-    public int count() {
-        NodePassenger current = head;
-        int count = 0;
-        while (current != null) {
-            count++;
-            current = current.next;
-        }
-        return count;
-    }
 }
